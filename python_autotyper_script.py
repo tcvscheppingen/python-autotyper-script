@@ -10,7 +10,6 @@ from datetime import datetime, timedelta
 browser = webdriver.Chrome(executable_path='chromedriver')
 browser.get('https://monkeytype.com/')
 
-
 def type_text(words):
     for word in words:
         # Using selenium send_keys() to type the word if it contains single or double quotation marks
@@ -19,6 +18,7 @@ def type_text(words):
             # Because 'word' isn't an HTML input element, an ActionChain is used to be able to send keys
             actions = ActionChains(browser)
             actions.send_keys(word.get_attribute('textContent') + ' ')
+            actions.pause(0.5)
             actions.perform()
 
         # If the word doesn't contain quotation marks, the word is typed character by character
@@ -65,4 +65,4 @@ def get_given_pause(pause_time):
 # This is an example of how to call the typing functions
 # Call `given_word_count()` to perform a words, custom or quote test
 get_given_pause(2)
-given_word_count()
+given_duration(30)
